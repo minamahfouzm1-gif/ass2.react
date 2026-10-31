@@ -137,21 +137,20 @@ function CommentsSection<
 >({
   post,
   postComments,
-  setPostComments,
+  
   commentInputs,
   setCommentInputs,
   sendingComment,
-  setSendingComment,
+
   user,
-  headers,
-  loadComments,
+
   handleComment,
   handleEditComment,
-  handleDeleteComment,
+ 
   handleCommentLike,
   handleReply,
   handleEditReply,
-  handleDeleteReply,
+ 
   handleReplyLike,
   loadReplies,
   openMenuId,
@@ -161,9 +160,9 @@ function CommentsSection<
   editedCommentContent,
   setEditedCommentContent,
   savingComment,
-  deleteCommentTarget,
+ 
   setDeleteCommentTarget,
-  deletingComment,
+
   replyingTo,
   setReplyingTo,
   replyInputs,
@@ -173,9 +172,9 @@ function CommentsSection<
   editedReplyContent,
   setEditedReplyContent,
   savingReply,
-  deleteReplyTarget,
+ 
   setDeleteReplyTarget,
-  deletingReply,
+
 }: CommentsSectionProps<TPost, TReply, TComment>) {
   const postId = getId(post);
   const comments = postComments[postId] || [];

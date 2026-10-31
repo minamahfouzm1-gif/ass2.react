@@ -43,8 +43,8 @@ const schema = zod
       }, "You must be at least 10 years old"),
 
     gender: zod.enum(["male", "female"], {
-      errorMap: () => ({ message: "Gender is required" }),
-    }),
+  message: "Please select gender",
+}),
 
     password: zod
       .string()

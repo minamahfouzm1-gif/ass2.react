@@ -15,7 +15,7 @@ import {
   updateReply as updatePostReply,
   deleteReply as deletePostReply,
   likeReply as likePostReply,
-} from "../../utils/postActions.js";
+} from "../../utils/postActions";
 
 const API_BASE = "https://route-posts.routemisr.com";
 const DEFAULT_AVATAR =
@@ -79,15 +79,7 @@ interface SocialPost extends Identifiable {
   sharedPost?: SocialPost | { post?: SocialPost };
   post?: SocialPost;
 }
-interface DeleteCommentTarget {
-  post: SocialPost;
-  comment: SocialComment;
-}
-interface DeleteReplyTarget {
-  post: SocialPost;
-  comment: SocialComment;
-  reply: SocialReply;
-}
+
 
 const getId = (item: Identifiable | null | undefined): string =>
   String(item?._id ?? item?.id ?? "");
@@ -191,7 +183,6 @@ export default function Home() {
 
   // ========== Menus ==========
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
-  const [showEmojiPicker, setShowEmojiPicker] = useState<string | null>(null);
 
   // ========== Edit & Delete Post ==========
   const [editPostTarget, setEditPostTarget] = useState<any>(null);

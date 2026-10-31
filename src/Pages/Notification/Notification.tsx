@@ -87,7 +87,7 @@ export default function Notification() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [markingAll, setMarkingAll] = useState(false);
-  const [readingId, setReadingId] = useState<string | null>(null);
+  const [, setReadingId] = useState<string | null>(null);
 
   const token = localStorage.getItem("token");
 
@@ -95,43 +95,43 @@ export default function Notification() {
     Authorization: `Bearer ${token}`,
   };
 
-  const fetchNotifications = async (currentFilter: FilterType) => {
-    if (!token) {
-      setLoading(false);
-      return;
-    }
+const fetchNotifications = async (currentFilter: FilterType) => {
+  if (!token) {
+    setLoading(false);
+    return;
+  }
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      const response = await axios.get(`${API_URL}/notifications`, {
-        headers,
-        params: {
-          unread: false,
-          page: 1,
-          limit: 10,
-        },
-      });
+    const response = await axios.get(`${API_URL}/notifications`, {
+      headers,
+      params: {
+        unread: currentFilter === "unread",
+        page: 1,
+        limit: 10,
+      },
+    });
 
-      const responseData = getRecord(response.data);
-      const data = getRecord(responseData.data);
+    const responseData = getRecord(response.data);
+    const data = getRecord(responseData.data);
 
-      const list = Array.isArray(data.notifications)
-        ? data.notifications
-        : Array.isArray(responseData.notifications)
-          ? responseData.notifications
-          : Array.isArray(responseData.data)
-            ? responseData.data
-            : [];
+    const list = Array.isArray(data.notifications)
+      ? data.notifications
+      : Array.isArray(responseData.notifications)
+        ? responseData.notifications
+        : Array.isArray(responseData.data)
+          ? responseData.data
+          : [];
 
-      setNotifications(list as NotificationItem[]);
-    } catch (error) {
-      console.error("Notifications error:", error);
-      setNotifications([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setNotifications(list as NotificationItem[]);
+  } catch (error) {
+    console.error("Notifications error:", error);
+    setNotifications([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const fetchUnreadCount = async () => {
     if (!token) return;
@@ -165,7 +165,9 @@ export default function Notification() {
 
   const handleFilterChange = (newFilter: FilterType) => {
     setFilter(newFilter);
+    fetchNotifications(newFilter);
   };
+
 
  const handleMarkAsRead = async (notification: NotificationItem) => {
    const id = getNotificationId(notification);

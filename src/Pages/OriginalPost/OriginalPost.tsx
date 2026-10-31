@@ -15,7 +15,7 @@ import {
   updateReply as updatePostReply,
   deleteReply as deletePostReply,
   likeReply as likePostReply,
-} from "../../utils/postActions.js";
+} from "../../utils/postActions";
 
 const DEFAULT_AVATAR =
   "https://pub-3cba56bacf9f4965bbb0989e07dada12.r2.dev/linkedPosts/default-profile.png";

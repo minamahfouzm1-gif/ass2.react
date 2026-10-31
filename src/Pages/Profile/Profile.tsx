@@ -225,7 +225,7 @@ export default function Profile() {
   };
 
   const [profileData, setProfileData] = useState<any>(null);
-  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [, setLoadingProfile] = useState(true);
 
   useEffect(() => {
     const fetchProfileData = async () => {
